@@ -78,8 +78,10 @@ function ProcessCommands(lstOfArgs) {
           bPlacePacman = true;
           break;
         case "MOVE":
-          pacman = utils.move(pacman);
-          console.log("MOVE | PACMAN DETAILS: ", pacman);
+          if (pacman != null) {
+            pacman = utils.move(pacman);
+            console.log("MOVE | PACMAN DETAILS: ", pacman);
+          }
           break;
         case "LEFT":
         case "RIGHT":
