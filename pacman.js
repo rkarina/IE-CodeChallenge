@@ -1,5 +1,6 @@
 //#region Headers
-const yargs = require("yargs");
+const fs = require("fs");
+const path = require("path");
 const chalk = require("chalk");
 const utils = require("./utils");
 const validator = require("validator");
@@ -25,18 +26,36 @@ function StartSimulator() {
   // Initialise
   DisplayMessage("Welcome to the Pacman Simulator!", colourEnum.Green);
 
-  const lstOfArgs = yargs.argv._;
+  // Read From Local Commands.txt File
+  ReadCommandsFromFile();
+}
 
-  // Validate Input
-  const sMessage = utils.validateArguments(lstOfArgs);
+function ReadCommandsFromFile() {
+  var filePath = path.join(__dirname, "commands.txt");
 
-  if (!validator.isEmpty(sMessage)) {
-    DisplayMessage(sMessage, colourEnum.Red);
-    return;
-  }
+  fs.readFile(filePath, { encoding: "utf-8" }, function(err, data) {
+    if (!err) {
+      if (!validator.isEmpty(data)) {
+        var lstOfArgs = data.split(" ");
 
-  // Process Each Command
-  ProcessCommands(lstOfArgs);
+        console.log("Arguments: ", lstOfArgs);
+
+        // Validate Input
+        const sMessage = utils.validateArguments(lstOfArgs);
+
+        if (!validator.isEmpty(sMessage)) {
+          DisplayMessage(sMessage, colourEnum.Red);
+          return;
+        }
+
+        // Process Each Command
+        ProcessCommands(lstOfArgs);
+      }
+    } else {
+      console.log(err);
+    }
+    return [];
+  });
 }
 
 function ProcessCommands(lstOfArgs) {

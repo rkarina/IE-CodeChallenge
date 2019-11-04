@@ -1,7 +1,6 @@
 const validator = require("validator");
 const config = require("./config");
 const commands = config.commands;
-const directions = config.dir;
 const MAX = config.MAX_RANGE;
 
 //#region Service Methods

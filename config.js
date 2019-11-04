@@ -6,10 +6,6 @@ const constants = {
     Yellow: 2,
     Red: 3
   },
-  dir: {
-    left: 0,
-    right: 1
-  },
   MAX_RANGE: 4
 };
 
