@@ -65,7 +65,7 @@ function ProcessCommands(lstOfArgs) {
     var coords = arg.split(",");
     var arg = arg.toUpperCase();
 
-    if (bPlacePacman) {
+    if (bPlacePacman && coords && coords.length === 3) {
       pacman = {
         x: parseInt(coords[0]),
         y: parseInt(coords[1]),

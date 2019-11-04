@@ -62,41 +62,47 @@ const helpers = {
     return sMessage;
   },
   report: function(pacman) {
-    console.log("PACMAN IS FACING: ", pacman.face);
-    console.log("COORDINATES: ", pacman.x, pacman.y);
+    if (pacman != null) {
+      console.log("PACMAN IS FACING: ", pacman.face);
+      console.log("COORDINATES: ", pacman.x, pacman.y);
+    }
   },
   rotate: function(pacman, dir) {
-    const face = pacman.face;
+    if (pacman != null) {
+      const face = pacman.face;
 
-    switch (face) {
-      case "NORTH":
-        return (pacman.face = dir === "RIGHT" ? "EAST" : "WEST");
-      case "EAST":
-        return (pacman.face = dir === "RIGHT" ? "SOUTH" : "NORTH");
-      case "SOUTH":
-        return (pacman.face = dir === "RIGHT" ? "WEST" : "EAST");
-      case "WEST":
-        return (pacman.face = dir === "RIGHT" ? "NORTH" : "SOUTH");
-    }
-  },
-  move: function(pacman) {
-    if (boundaryCheck(pacman)) {
-      switch (pacman.face) {
+      switch (face) {
         case "NORTH":
-          pacman.y += 1;
-          break;
+          return (pacman.face = dir === "RIGHT" ? "EAST" : "WEST");
         case "EAST":
-          pacman.x += 1;
-          break;
+          return (pacman.face = dir === "RIGHT" ? "SOUTH" : "NORTH");
         case "SOUTH":
-          pacman.y -= 1;
-          break;
+          return (pacman.face = dir === "RIGHT" ? "WEST" : "EAST");
         case "WEST":
-          pacman.x -= 1;
-          break;
+          return (pacman.face = dir === "RIGHT" ? "NORTH" : "SOUTH");
       }
     }
-
+    return pacman;
+  },
+  move: function(pacman) {
+    if (pacman != null) {
+      if (boundaryCheck(pacman)) {
+        switch (pacman.face) {
+          case "NORTH":
+            pacman.y += 1;
+            break;
+          case "EAST":
+            pacman.x += 1;
+            break;
+          case "SOUTH":
+            pacman.y -= 1;
+            break;
+          case "WEST":
+            pacman.x -= 1;
+            break;
+        }
+      }
+    }
     return pacman;
   }
 };
